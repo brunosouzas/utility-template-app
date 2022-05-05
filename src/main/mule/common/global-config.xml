@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" 
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+						http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+						http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd 
+						http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+						http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	
+
+
+	<global-property doc:name="environment_mule" name="mule.env" value="LOCAL" />
+
+
+
+	<configuration-properties doc:name="common_properties" doc:id="18d12bbb-4805-4052-ae1d-7a508e13fd42" file="properties/config.yaml" />
+
+
+
+	<configuration-properties doc:name="environment_properties" doc:id="d14cc3ab-2418-4dff-822d-88326ceaabe0" file="properties/config-${mule.env}.yaml" />
+
+
+
+	<configuration-properties doc:name="pom_properties" doc:id="66110080-64fb-47da-9309-c31141f3af64" file="properties/pom.yaml" />
+	
+	
+	
+	<http:listener-config name="main_http-listener" doc:name="HTTP Listener config" doc:id="cdec5859-29c1-4bf7-bd75-dbd7f75ce1db">
+		<http:listener-connection host="0.0.0.0" port="${http.private.port}" />
+	</http:listener-config>
+	
+	
+	
+	<apikit:config name="config_api-kit" api="${api.spec}" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+
+
+
+ 	<api-gateway:autodiscovery 
+		doc:name="main_api-gateway-autodiscovery" 
+		doc:id="2341c4a4-63b6-4ca8-a371-26fc49c7fe58"
+		apiId="${anypoint.platform.api.autodiscovery}" 
+		ignoreBasePath="true" 
+		flowRef="utility-template-api-main">
+	</api-gateway:autodiscovery>
+</mule>

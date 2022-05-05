@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+						http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+						
+						
+						
+	<error-handler name="api-kit-error" doc:id="26f1ccd3-fd1e-45b9-9756-129033650bbf">
+		<on-error-propagate enableNotifications="true" logException="false"
+			type="APIKIT:BAD_REQUEST, APIKIT:NOT_FOUND, APIKIT:METHOD_NOT_ALLOWED, APIKIT:NOT_ACCEPTABLE, APIKIT:UNSUPPORTED_MEDIA_TYPE, APIKIT:NOT_IMPLEMENTED">
+
+			<ee:transform doc:name="variables and response" doc:id="80e4e08e-b125-4bc7-a594-6571abdac04e">
+				<ee:message>
+					<ee:set-payload resource="dwl/error/p-response-common-error-apikit.dwl" />
+				</ee:message>
+				<ee:variables>
+					<ee:set-variable resource="dwl/error/v-logMessage-common-error-apikit.dwl" variableName="vLogMessage" />
+					<ee:set-variable resource="dwl/error/v-httpStatus-common-error-apikit.dwl" variableName="httpStatus" />
+				</ee:variables>
+			</ee:transform>
+
+			<logger doc:name="LOG ERROR APIkit" doc:id="63794997-f2ce-489a-933d-962b7f7f245d" message="#[vars.vLogMessage]" level="ERROR" category="${logger.category}"/>
+		</on-error-propagate>
+	</error-handler>
+</mule>

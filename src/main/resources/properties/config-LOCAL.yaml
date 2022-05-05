@@ -1,0 +1,31 @@
+# Configuration file for the integration environment
+
+# Autodiscovery Conf - API ID
+anypoint.platform.api.autodiscovery: "123"
+
+
+
+# Common Request configuration
+http-request:
+  protocol: "HTTPS"
+  host: "status.slack.com"
+  port: "443"
+  timeout:
+    response: "120000"
+  reconnection:
+    frequency: "10000"
+    attempts: "3"
+    
+
+
+# Request configuration
+slack-status:
+  protocol: "${http-request.protocol}"
+  host: "${http-request.host}"
+  port: "${http-request.port}"
+  path: "/api/v2.0.0/current"
+  timeout:
+    response: "${http-request.timeout.response}"
+  header:
+    client_id: "123"
+    client_secret: "123"

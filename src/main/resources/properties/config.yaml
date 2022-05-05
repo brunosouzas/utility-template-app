@@ -1,0 +1,17 @@
+# Common properties throughout all environments
+
+# HTTP Listener configuration
+http:
+  host: "0.0.0.0"
+  private:
+    port: "8081"
+
+
+
+# API Spec Properties
+api.spec: "resource::${raml.groupId}:${raml.artifactId}:${raml.version}:raml:zip:${raml.artifactId}.raml"
+  
+  
+  
+# Logger Configuration
+logger.category: "com.brunosouzas.${api.domain}.${application.artifactId}"
