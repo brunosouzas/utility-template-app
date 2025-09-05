@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: utility-template-app
+  title: MuleSoft Template Application
+  tags:
+    - template
+    - raml
+    - api
+    - mulesoft
+  description: This asset provides a basic template for a Application based REST API.
+  annotations:
+    github.com/project-slug: 'brunosouzas/utility-template-app'
+    backstage.io/techdocs-ref: dir:./techDocs
+spec:
+  type: service
+  lifecycle: development
+  owner: administrators

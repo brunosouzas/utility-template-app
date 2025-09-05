@@ -1,0 +1,5 @@
+site_name: 'MuleSoft Template Application'
+nav:
+  - Home: index.md
+plugins:
+  - techdocs-core
